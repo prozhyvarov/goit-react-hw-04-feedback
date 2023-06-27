@@ -2,19 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FeedbackContainer, FeedbackButton } from './FeedBackOptions.styled';
 
-export const FeedbackOptions = ({ options, onLeaveFeedBack }) => {
+export const FeedbackOptions = ({ onLeaveFeedback, options, children }) => {
   return (
-    <FeedbackContainer title="Please leave feedback">
-      {options.map(option => (
+    <>
+      <FeedbackContainer>
         <FeedbackButton
-          key={option}
-          type="button"
-          onClick={() => onLeaveFeedBack(option)}
+          onClick={() => onLeaveFeedback(options[0])}
+          aria-label="Good"
         >
-          {option}
+          Good
         </FeedbackButton>
-      ))}
-    </FeedbackContainer>
+        <FeedbackButton
+          onClick={() => onLeaveFeedback(options[1])}
+          aria-label="Neutral"
+        >
+          Neutral
+        </FeedbackButton>
+        <FeedbackButton
+          onClick={() => onLeaveFeedback(options[2])}
+          aria-label="Bad"
+        >
+          Bad
+        </FeedbackButton>
+      </FeedbackContainer>
+      {children}
+    </>
   );
 };
 
